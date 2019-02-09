@@ -5,15 +5,11 @@ import app.Entity.Permissions;
 import app.Entity.User;
 import app.Enum.ResType;
 import app.Mapper.UserDao;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
