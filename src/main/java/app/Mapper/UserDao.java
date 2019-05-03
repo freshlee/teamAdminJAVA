@@ -11,11 +11,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper
 @Component
-@CacheConfig(cacheNames = "users")
 public interface UserDao {
     @Results({ //2
             @Result(property = "id", column = "id"),
@@ -26,6 +26,12 @@ public interface UserDao {
     @Select("select * from user where name = #{username}")
     @Cacheable(value = "users", key = "#p0")
     User getUser(String username);
-//    @CachePut(key = "#p0")
-//    void UpdareRedis();
+    @Results({ //2
+            @Result(property = "id", column = "id"),
+            @Result(property = "username", column = "name"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "authorizationId", column = "authorizationId")
+    })
+    @Select("select * from user")
+    ArrayList<User> getUserList();
 }

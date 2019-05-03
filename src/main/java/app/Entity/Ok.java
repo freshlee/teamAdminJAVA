@@ -8,6 +8,16 @@ import java.util.Map;
 public class Ok {
     private ResType resType;
 
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public String msg;
+
     public Map getData() {
         return data;
     }

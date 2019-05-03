@@ -15,6 +15,10 @@ spring:
       max-wait: -1
       max-idle: 8
       min-idle: 0
+shiro:
+  server: 127.0.0.1:8080
+  cas: cas.xxx.com # 这是CAS服务的地址
 server:
   port: 8080
+
 

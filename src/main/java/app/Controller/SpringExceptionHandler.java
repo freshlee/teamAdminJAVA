@@ -19,6 +19,7 @@ public class SpringExceptionHandler {
     @ResponseBody
     public String handleOtherExceptions(final Exception ex) {
         Ok error = new Ok(ResType.Fail);
+        error.setMsg("系统报错");
         return error.toString();
     }
 }

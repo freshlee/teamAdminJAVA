@@ -66,17 +66,6 @@ public class redisConf extends CachingConfigurerSupport{
         template.afterPropertiesSet();
         return template;
     }
-//    @Bean
-//    public JedisPoolConfig jedisPoolConfig() {
-//        JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-//        jedisPoolConfig.setBlockWhenExhausted(true);
-//        jedisPoolConfig.setTestOnBorrow(true);
-//        jedisPoolConfig.setMaxTotal(3);
-//        jedisPoolConfig.setMaxIdle(8);
-//        jedisPoolConfig.setMinIdle(0);
-//        jedisPoolConfig.setMaxWaitMillis(100000);
-//        return jedisPoolConfig;
-//    }
     private void setSerializer(StringRedisTemplate template){
         @SuppressWarnings({ "rawtypes", "unchecked" })
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
