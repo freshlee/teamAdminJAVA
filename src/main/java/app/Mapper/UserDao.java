@@ -24,7 +24,7 @@ public interface UserDao {
             @Result(property = "authorizationId", column = "authorizationId")
     })
     @Select("select * from user where name = #{username}")
-    @Cacheable(value = "users", key = "#p0")
+//    @Cacheable(value = "users", key = "#p0")
     User getUser(String username);
     @Results({ //2
             @Result(property = "id", column = "id"),

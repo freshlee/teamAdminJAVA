@@ -45,6 +45,8 @@ public class ShiroConf {
         //拦截页面
         fMap.put("/one", "authc");
         fMap.put("/two", "authc");
+        fMap.put("/getTaskList", "authc");
+        fMap.put("/userlist", "authc");
 
 
         //拦截未授权

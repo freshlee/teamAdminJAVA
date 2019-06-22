@@ -49,14 +49,9 @@ public class UserController {
         //封装用户数据
         UsernamePasswordToken userToken = new UsernamePasswordToken(user.getUsername(), user.getPassword());
         //执行登录方法,用捕捉异常去判断是否登录成功
-        try {
-            subject.login(userToken);
-            return "redirect:/what.do";
-        } catch (UnknownAccountException e) {
-            return "用户名不存在";
-        } catch (IncorrectCredentialsException e) {
-            return "密码错误";
-        }
+        subject.login(userToken);
+        Ok res = new Ok(ResType.Success);
+        return res.toString();
     }
     @PostMapping("user/login")
     @ResponseBody
