@@ -1,5 +1,7 @@
 package app.Mapper;
 
+import app.Entity.Permissions;
+import app.Entity.RoleEntiry;
 import app.Entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
@@ -34,4 +36,8 @@ public interface UserDao {
     })
     @Select("select * from user")
     ArrayList<User> getUserList();
+    @Select("SELECT allow_page FROM role_permission as p, re_role_permission as s WHERE s.role_id = #{role_id} AND s.permission_id = p.id")
+    ArrayList<Permissions> getPermissionList(int role_id);
+    @Select("SELECT * FROM role_type WHERE id = #{role_type}")
+    RoleEntiry getRole(User user);
 }

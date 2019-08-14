@@ -2,11 +2,14 @@ package app.Controller;
 
 import app.Entity.Ok;
 import app.Entity.Permissions;
+import app.Entity.RoleEntiry;
 import app.Entity.User;
 import app.Enum.ResType;
 import app.Mapper.UserDao;
 import app.Service.UserService;
+import com.sun.deploy.net.HttpResponse;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -14,6 +17,9 @@ import org.apache.shiro.subject.Subject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,34 +59,22 @@ public class UserController {
         Ok res = new Ok(ResType.Success);
         return res.toString();
     }
-    @PostMapping("user/login")
-    @ResponseBody
-    public String Login(@RequestBody User req_user, HttpServletResponse response) throws Exception {
-        User user = userDao.getUser(req_user.getUsername());
-        if (user.getPassword().equals(req_user.getPassword())) {
-            Ok res_ok = new Ok(ResType.Success);
-            return res_ok.toString();
-        } else {
-            Ok res_err = new Ok(ResType.Logout);
-            return res_err.toString();
-        }
-    }
     @GetMapping("userlist")
     public String getUserList () {
         ArrayList<User> userList = userService.getUserList();
         JSONArray userList_json = new JSONArray(userList);
         return  userList_json.toString();
     }
-    @GetMapping("user")
+    @GetMapping("getUserInfo")
     public String user() throws Exception{
         Ok ok = new Ok(ResType.Success);
-        User user = new User();
-        user.setAge(26);
-        user.setUsername("lee");
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
         Map<String, Object> user_map = javaBean2Map(user);
-        Permissions permissions = new Permissions();
-        permissions.setRole("admin");
-        user_map.put("permissions", permissions);
+        RoleEntiry user_role = userService.getRole(user);
+        ArrayList permissions_list = userService.getPermissionList(user_role.getId());
+//        permissions.setRole("admin");
+        user_role.setPermission_list(permissions_list);
+        user_map.put("permissions", user_role);
         ok.setData(user_map);
         return ok.toString();
     }

@@ -1,6 +1,7 @@
 package app.Service;
 
 import app.Entity.Ok;
+import app.Entity.RoleEntiry;
 import app.Entity.User;
 import app.Enum.ResType;
 import app.Mapper.UserDao;
@@ -22,5 +23,13 @@ public class UserService {
     public ArrayList<User> getUserList() {
         ArrayList users = userDao.getUserList();
         return users;
+    }
+    public ArrayList<User> getPermissionList(int role_id) {
+        ArrayList permissions = userDao.getPermissionList(role_id);
+        return permissions;
+    }
+    public RoleEntiry getRole(User req_user) {
+        RoleEntiry role = userDao.getRole(req_user);
+        return role;
     }
 }

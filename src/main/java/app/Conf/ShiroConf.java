@@ -43,20 +43,22 @@ public class ShiroConf {
          */
         Map<String, String> fMap = new HashMap<String, String>();
         //拦截页面
-        fMap.put("/one", "authc");
-        fMap.put("/two", "authc");
         fMap.put("/getTaskList", "authc");
+        fMap.put("/getUserInfo", "authc");
         fMap.put("/userlist", "authc");
+        LinkedHashMap<String, Filter> filtsMap=new LinkedHashMap<String, Filter>();
+        filtsMap.put("authc", new MyShiroAuthcFilter());
 
 
         //拦截未授权
         fMap.put("/one", "perms[user:one]");
         fMap.put("/two", "perms[user:two]");
         //被拦截返回登录页面
-        shiroFilterFactoryBean.setLoginUrl("/login");
+//        shiroFilterFactoryBean.setLoginUrl("/login");
         //授权拦截返回页面
         shiroFilterFactoryBean.setUnauthorizedUrl("/permission");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(fMap);
+        shiroFilterFactoryBean.setFilters(filtsMap);
         return shiroFilterFactoryBean;
 
     }

@@ -14,6 +14,14 @@ public class User {
     public int authorizationId;
     public String avatar;
     public int permissions;
+    public int role_type;
+    public int getRole_type() {
+        return role_type;
+    }
+
+    public void setRole_type(int role_type) {
+        this.role_type = role_type;
+    }
 
     public String getUsername() {
         return username;

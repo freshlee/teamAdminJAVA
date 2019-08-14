@@ -20,5 +20,6 @@ shiro:
   cas: cas.xxx.com # 这是CAS服务的地址
 server:
   port: 8080
+  context-path: "/"
 
 
