@@ -14,7 +14,7 @@
         <version>1.4.0.RELEASE</version>
     </parent>
     <properties>
-        <shiro.version>1.2.4</shiro.version>
+        <shiro.version>1.7.1</shiro.version>
     </properties>
     <!-- 为一个web应用程序添加典型的依赖关系, Starter POMs依赖 -->
     <dependencies>
